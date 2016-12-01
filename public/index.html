@@ -1,14 +1,26 @@
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Main</title>
+<head>
+  <script src="js/jquery-3.1.1.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-database.js"></script>
+  <script src="js/volleystat.js"></script>
+  <meta charset="utf-8">
+  <title>Main</title>
+</head>
+<body >
 
-  </head>
-  <body >
+<A href="teams.html">Команды</A><BR/>
+<A href="games.html">Игры</A><BR/>
+<A href="players.html">Игроки</A><BR/>
 
-  <A href="teams.html">Команды</A><BR/>
-  <A href="games.html">Игры</A><BR/>
-  <A href="players.html">Игроки</A><BR/>
-  </body>
+<button id="login">Login</button>
+<script >
+    $("#login").click(function () {
+      googleLogin();
+    });
+</script>
+</body>
 </html>
