@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/http_www.gstatic.com_firebasejs_4.7.0_firebase.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script type="text/javascript">
+        var set;
+        var game = {
+            "date" : "",
+            "team1" : {
+                "name" : "t1",
+                "score" : 3,
+                "set_scores" : []
+            },
+            "team2" : {
+                "name" : "t2",
+                "score" : 1,
+                "set_scores" : []
+            },
+            "scores" : {
+                "team1" : 3,
+                "team2" : 1,
+                "set1" : {
+                    "team1" : 25,
+                    "team2" : 11
+                },
+                "set2" : {
+                    "team1" : 25,
+                    "team2" : 12
+                },
+                "set3" : {
+                    "team1" : 13,
+                    "team2" : 25
+                },
+                "set4" : {
+                    "team1" : 25,
+                    "team2" : 14
+                },
+                "total" : {
+                    "team1" : 88,
+                    "team2" : 62
+                }
+            },
+            "stats" : {
+                "set1" : {
+                    "name" : "1 партия",
+                    "team1" : {
+                        "error" : 1,
+                        "ace" : 2,
+                        "attack" : 3,
+                        "tip": 4,
+                        "block": 5
+                    },
+                    "team2" : {
+                        "error" : 5,
+                        "ace" : 4,
+                        "attack" : 3,
+                        "tip": 2,
+                        "block": 1
+                    },
+                    "history" : [
+                        {"team": 1, "type" : "error"}
+                    ]
+                },
+                "set2" : {
+                    "name" : "2 партия",
+                    "team1" : {
+                        "error" : 6,
+                        "ace" : 7,
+                        "attack" : 8,
+                        "tip": 9,
+                        "block": 0
+                    },
+                    "team2" : {
+
+                        "error" : 0,
+                        "ace" : 9,
+                        "attack" : 8,
+                        "tip": 7,
+                        "block": 6
+                    },
+                    "history" : [
+                        {"team": 1, "type" : "error"}
+                    ]
+                },
+                "set3" : {
+                    "name" : "3 партия",
+                    "team1" : {
+                        "error" : 1,
+                        "ace" : 2,
+                        "attack" : 3,
+                        "tip": 4,
+                        "block": 5
+                    },
+                    "team2" : {
+                        "error" : 5,
+                        "ace" : 4,
+                        "attack" : 3,
+                        "tip": 2,
+                        "block": 1
+                    },
+                    "history" : [
+                        {"team": 1, "type" : "error"}
+                    ]
+                },
+                "set4" : {
+                    "name" : "4 партия",
+                    "team1" : {
+                        "error" : 6,
+                        "ace" : 7,
+                        "attack" : 8,
+                        "tip": 9,
+                        "block": 0
+                    },
+                    "team2" : {
+                        "error" : 0,
+                        "ace" : 9,
+                        "attack" : 8,
+                        "tip": 7,
+                        "block": 6
+                    },
+                    "history" : [
+                        {"team": 1, "type" : "error"}
+                    ]
+                },
+                "total" : {
+                    "name" : "вся встреча",
+                    "team1" : {
+
+                    },
+                }
+            }
+        };
+
+        function init() {
+            $('#gameLink').removeAttr('href').addClass("teal").addClass("darken-3").removeClass("grey-text");
+            $('td').addClass("center");
+        }
+
+        function updateUi(game) {
+            $('#team1Name').html(game.team1.name);
+            $('#team2Name').html(game.team2.name);
+            $('#team1NameStatCard').html(game.team1.name);
+            $('#team2NameStatCard').html(game.team2.name);
+
+            updateSetButton(game.scores.set1, $('#set1Button'), $('#set1ScoreText'), game.stats.set1);
+            updateSetButton(game.scores.set2, $('#set2Button'), $('#set2ScoreText'), game.stats.set2);
+            updateSetButton(game.scores.set3, $('#set3Button'), $('#set3ScoreText'), game.stats.set3);
+            updateSetButton(game.scores.set4, $('#set4Button'), $('#set4ScoreText'), game.stats.set4);
+            updateSetButton(game.scores.set5, $('#set5Button'), $('#set5ScoreText'), game.stats.set5);
+
+            updateTotalButton(game);
+
+            var selectedSet = game.scores.set1;
+            displaySetStat(selectedSet);
+            $('#set1Button').addClass("red");
+            if (selectedSet != null) {
+                $('#team1SetScore').html(null2Zero(selectedSet.team1));
+                $('#team2SetScore').html(null2Zero(selectedSet.team2));
+            }
+        }
+
+        function updateTotalButton(game) {
+            var team1points = 0;
+            var team2points = 0;
+
+            $.each([game.scores.set1, game.scores.set2, game.scores.set3, game.scores.set4, game.scores.set5], function (i, scoreSet) {
+                if (scoreSet != null) {
+                    team1points += scoreSet.team1;
+                    team2points += scoreSet.team2;
+                }
+            });
+
+            statsSet = {
+                "name": "вся игра",
+                "team1": {
+                    "error" : 0,
+                    "ace" : 0,
+                    "attack" : 0,
+                    "tip": 0,
+                    "block": 0},
+                "team2": {
+                    "error" : 0,
+                    "ace" : 0,
+                    "attack" : 0,
+                    "tip": 0,
+                    "block": 0
+                }
+            };
+
+            $.each([game.stats.set1, game.stats.set2, game.stats.set3, game.stats.set4, game.stats.set5], function (i, set) {
+                if (set != null) {
+                    statsSet.team1.tip += null2Zero(set.team1.tip);
+                    statsSet.team1.ace += null2Zero(set.team1.ace);
+                    statsSet.team1.attack += null2Zero(set.team1.attack);
+                    statsSet.team1.block += null2Zero(set.team1.block);
+                    statsSet.team1.error += null2Zero(set.team1.error);
+
+                    statsSet.team2.tip += null2Zero(set.team2.tip);
+                    statsSet.team2.ace += null2Zero(set.team2.ace);
+                    statsSet.team2.attack += null2Zero(set.team2.attack);
+                    statsSet.team2.block += null2Zero(set.team2.block);
+                    statsSet.team2.error += null2Zero(set.team2.error);
+                }
+            });
+
+            $('#allSetsScoreText').html(team1points + ":" + team2points);
+            $('#allSetsButton').click(function () {
+
+                displaySetStat(statsSet);
+
+                $('#team1SetScore').html(team1points);
+                $('#team2SetScore').html(team2points);
+
+                $('#set1Button').removeClass("red");
+                $('#set2Button').removeClass("red");
+                $('#set3Button').removeClass("red");
+                $('#set4Button').removeClass("red");
+                $('#set5Button').removeClass("red");
+                $('#allSetsButton').addClass("red");
+            });
+        }
+
+        function updateSetButton(scoreSet, setButton, setScoreText, statsSet) {
+
+            setButton.click(function () {
+               displaySetStat(statsSet);
+               if (scoreSet != null) {
+                   $('#team1SetScore').html(null2Zero(scoreSet.team1));
+                   $('#team2SetScore').html(null2Zero(scoreSet.team2));
+               }
+                $('#set1Button').removeClass("red");
+                $('#set2Button').removeClass("red");
+                $('#set3Button').removeClass("red");
+                $('#set4Button').removeClass("red");
+                $('#set5Button').removeClass("red");
+                $('#allSetsButton').removeClass("red");
+                setButton.addClass("red");
+            });
+
+            if (scoreSet != null) {
+                setButton.removeClass('disabled');
+                setScoreText.html(scoreSet.team1 + ":" + scoreSet.team2);
+            } else {
+                setButton.addClass('disabled');
+                setScoreText.html('');
+            }
+        }
+
+        function null2Zero(value) {
+            if (value == null) {
+                return 0;
+            }
+            return value;
+        }
+
+        function displaySetStat(statsSet) {
+            $('#statsCardTitle').html('Статистика: ' + statsSet.name);
+
+            $('#team1ScoreErrorStat').html(null2Zero(statsSet.team1.error));
+            $('#team2ScoreErrorStat').html(null2Zero(statsSet.team2.error));
+
+            $('#team1ScoreAceStat').html(null2Zero(statsSet.team1.ace));
+            $('#team2ScoreAceStat').html(null2Zero(statsSet.team2.ace));
+
+            $('#team1ScoreAttackStat').html(null2Zero(statsSet.team1.attack));
+            $('#team2ScoreAttackStat').html(null2Zero(statsSet.team2.attack));
+
+            $('#team1ScoreBlockStat').html(null2Zero(statsSet.team1.block));
+            $('#team2ScoreBlockStat').html(null2Zero(statsSet.team2.block));
+
+            $('#team1ScoreTipStat').html(null2Zero(statsSet.team1.tip));
+            $('#team2ScoreTipStat').html(null2Zero(statsSet.team2.tip));
+        }
+
+        function addPoint(team, type) {
+
+        }
+
+        window.addEventListener('load', function() {
+            //var game = getUrlParameter("game");
+            updateUi(game);
+        });
+    </script>
+</head>
+<body>
+<header id="header">
+</header>
+<main>
+    <div class="row" id="total">
+
+        <!--SET SCORE-->
+        <div class="col s2 center">
+            <h4 id="team1Name">Молния</h4>
+        </div>
+        <div class="col s1 center">
+            <h4 id="team1SetScore">1</h4>
+        </div>
+        <div class="col s1 center">
+            <h4 id="team2SetScore">0</h4>
+        </div>
+        <div class="col s2 center">
+            <h4 id="team2Name">Восход</h4>
+        </div>
+
+
+        <table id="setButtons"
+               class="col s5 center"
+               style="margin-top: 16px">
+            <tr>
+                <td class="no-padding center">
+                    <a id="set1Button" class="btn-floating btn-large waves-effect waves-light">
+                    <i class="material-icons">looks_one</i></a>
+                </td>
+                <td class="no-padding center">
+                    <a id="set2Button" class="btn-floating btn-large waves-effect waves-light">
+                        <i class="material-icons">looks_two</i></a>
+                </td>
+                <td class="no-padding center">
+                    <a id="set3Button" class="btn-floating btn-large waves-effect waves-light">
+                        <i class="material-icons">looks_3</i></a>
+                </td>
+                <td class="no-padding center">
+                    <a id="set4Button" class="btn-floating btn-large waves-effect waves-light">
+                        <i class="material-icons">looks_4</i></a>
+                </td>
+                <td class="no-padding center">
+                    <a id="set5Button" class="btn-floating btn-large waves-effect waves-light">
+                        <i class="material-icons">looks_5</i></a>
+                </td>
+                <td class="no-padding center">
+                    <a id="allSetsButton" class="btn-floating btn-large waves-effect waves-light">
+                        <i class="material-icons">insert_chart</i></a>
+                </td>
+            </tr>
+            <tr>
+                <td id="set1ScoreText" class="no-padding">25-13</td>
+                <td id="set2ScoreText" class="no-padding">25-13</td>
+                <td id="set3ScoreText" class="no-padding">25-13</td>
+                <td id="set4ScoreText" class="no-padding">25-13</td>
+                <td id="set5ScoreText" class="no-padding">25-13</td>
+                <td id="allSetsScoreText" class="no-padding">25-13</td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="row">
+
+        <table id="addScoreButtonsTable"
+               class="col s6 center">
+            <tr>
+                <td class="center"><a id="btnAddScoreErrorTeam1" class="btn waves-effect red white-text" href="#"><i class="material-icons">plus_one</i></a></td>
+                <td class="center">Ошибка соперника</td>
+                <td class="center"><a id="btnAddScoreErrorTeam2" class="btn waves-effect red white-text" href="#"><i class="material-icons">plus_one</i></a></td>
+            </tr>
+            <tr>
+                <td class="center"><a id="btnAddScoreAceTeam1" class="btn waves-effect red white-text" href="#"><i class="material-icons">plus_one</i></a></td>
+                <td class="center">Эйс</td>
+                <td class="center"><a id="btnAddScoreAceTeam2" class="btn waves-effect red white-text" href="#"><i class="material-icons">plus_one</i></a></td>
+            </tr>
+            <tr>
+                <td class="center"><a id="btnAddScoreAttackTeam1" class="btn waves-effect red white-text" href="#"><i class="material-icons">plus_one</i></a></td>
+                <td class="center">Атака</td>
+                <td class="center"><a id="btnAddScoreAttackTeam2" class="btn waves-effect red white-text" href="#"><i class="material-icons">plus_one</i></a></td>
+            </tr>
+            <tr>
+                <td class="center"><a id="btnAddScoreTipTeam1" class="btn waves-effect red white-text" href="#"><i class="material-icons">plus_one</i></a></td>
+                <td class="center">Скидка</td>
+                <td class="center"><a id="btnAddScoreTipTeam2" class="btn waves-effect red white-text" href="#"><i class="material-icons">plus_one</i></a></td>
+            </tr>
+            <tr>
+                <td class="center"><a id="btnAddScoreBlockTeam1" class="btn waves-effect red white-text" href="#"><i class="material-icons">plus_one</i></a></td>
+                <td class="center">Блок</td>
+                <td class="center"><a id="btnAddScoreBlockTeam2" class="btn waves-effect red white-text" href="#"><i class="material-icons">plus_one</i></a></td>
+            </tr>
+        </table>
+
+        <div id="statsCard"
+             class="card col s5">
+            <H5 id="statsCardTitle"
+                class="center" style="width:100%; display:block;">Статистика встречи</H5>
+            <table class="card-content">
+                <thead>
+                    <tr>
+                        <th id="team1NameStatCard" class="center">Молния</th>
+                        <th></th>
+                        <th id="team2NameStatCard" class="center">Восход</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td id="team1ScoreErrorStat">5</td>
+                        <td class="center">Ошибки соперника</td>
+                        <td id="team2ScoreErrorStat">99</td>
+                    </tr>
+                    <tr>
+                        <td id="team1ScoreAceStat" >5</td>
+                        <td class="center">Эйс</td>
+                        <td id="team2ScoreAceStat">99</td>
+                    </tr>
+                    <tr>
+                        <td id="team1ScoreAttackStat" >5</td>
+                        <td>Атака</td>
+                        <td id="team2ScoreAttackStat">99</td>
+                    </tr>
+                    <tr>
+                        <td id="team1ScoreTipStat">5</td>
+                        <td>Скидка</td>
+                        <td id="team2ScoreTipStat">99</td>
+                    </tr>
+                    <tr>
+                        <td id="team1ScoreBlockStat">5</td>
+                        <td>Блок</td>
+                        <td id="team2ScoreBlockStat">99</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
+
+<script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+</html>
