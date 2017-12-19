@@ -48,6 +48,8 @@ $(document).ready(function(){
             var sumPointT2 = parseInt($('#a2').text())+parseInt($('#b2').text())+parseInt($('#c2').text())+parseInt($('#d2').text())+parseInt($('#e2').text());
             $("#f1").text(sumPointT1);
             $("#f2").text(sumPointT2);
+            $('.team1PointsAll').text($('#f1').text());
+            $('.team2PointsAll').text($('#f2').text());
         };
         $('.col1').click(function(){
             var colortest = $(this).data("col");
@@ -69,12 +71,15 @@ $(document).ready(function(){
         });
         //Выбор команды  1 для добавления в табло
         $('.pick1').click(function(){
+            pickTeam1($(this));
+/*
             var team1Pick = $(this).data("pick");
             $("#team1").text(team1Pick);
             $(".team1name").text(team1Pick);
             var team1color = $(this).data("color");
             $("#team1color").css({'background':'#'+team1color});
             $("#team1colorCustom").val(team1color);
+*/
         });
         //Выбор команды  2 для добавления в табло
         $('.pick2').click(function(){
@@ -114,7 +119,7 @@ $(document).ready(function(){
               radio2();
           });
           $("#refresh").click(function(){
-            refresh();
+            $('.list').toggleClass('hideblock');
           });
             addEventListener("keydown", function(event) {
             if (event.keyCode == 49)
@@ -194,6 +199,7 @@ function refresh(){
 }
 var естьЛиКнопки = 0;
 function morePointForTeam1(){
+
         function stata(){
             $('.wrap').prepend('<div class="remove"><button class="button1" data-typea="Ошибка">Ошибка <br>(1)</button><button class="button2" data-typea="Эйс">Эйс <br>(2)</button><button class="button3" data-typea="Атака">Атака <br>(3)</button><button class="button4" data-typea="Скидка">Скидка <br>(4)</button><button class="button5" data-typea="Блок">Блок <br>(5)</button></div>');
             };   
@@ -268,10 +274,13 @@ var Команда1_Блок_Партия5 = 0;
     if (psy == 0) {
         document.getElementById("SCORE1").value = x;
         $('#a1').text(x);
+         $('.team1Points1').text($('#a1').text());
          $(".remove button").click(function(){
             typear = $(this).data('typea');
             var point = $(abs[psy]).text();
             естьЛиКнопки = 0;
+           
+            
              if (typear == 'Ошибка') {
                 Команда1_Ошибка_СтатистикаПоВстрече = parseInt($('.команда1_Ошибка').text()) + 1;
                 $('.команда1_Ошибка').text(Команда1_Ошибка_СтатистикаПоВстрече);
@@ -317,6 +326,7 @@ var Команда1_Блок_Партия5 = 0;
         document.getElementById("tablo").style.width = "250px";
         document.getElementById("b1").style.opacity = 1;
         document.getElementById("b2").style.opacity = 1;
+            $('.team1Points2').text($('#b1').text());
          $(".remove button").click(function(){
             typear = $(this).data('typea');
             var point = $(abs[psy]).text();
@@ -364,6 +374,7 @@ var Команда1_Блок_Партия5 = 0;
         document.getElementById("tablo").style.width = "275px";
         document.getElementById("c1").style.opacity = 1;
         document.getElementById("c2").style.opacity = 1;
+            $('.team1Points3').text($('#c1').text());
          $(".remove button").click(function(){
             typear = $(this).data('typea');
             var point = $(abs[psy]).text();
@@ -411,6 +422,7 @@ var Команда1_Блок_Партия5 = 0;
         document.getElementById("tablo").style.width = "300px";
         document.getElementById("d1").style.opacity = 1;
         document.getElementById("d2").style.opacity = 1;
+            $('.team1Points4').text($('#d1').text());
          $(".remove button").click(function(){
             typear = $(this).data('typea');
             var point = $(abs[psy]).text();
@@ -458,6 +470,7 @@ var Команда1_Блок_Партия5 = 0;
         document.getElementById("tablo").style.width = "325px";
         document.getElementById("e1").style.opacity = 1;
         document.getElementById("e2").style.opacity = 1;
+            $('.team1Points5').text($('#e1').text());
          $(".remove button").click(function(){
             typear = $(this).data('typea');
             var point = $(abs[psy]).text();
@@ -522,6 +535,7 @@ var Команда1_Блок_Партия5 = 0;
                     document.getElementById("GSCORE1").value = (v-0)+1;
                     document.getElementById("point1").innerHTML = document.getElementById("GSCORE1").value;
                     z[i].style.border = "1px solid gray";
+
                     }  
             }
         }
@@ -609,6 +623,7 @@ stata();
     if (psy == 0) {
         document.getElementById("a2").innerHTML = x;
         document.getElementById("SCORE2").value = x;
+         $('.team2Points1').text($('#a2').text());
             $(".remove button").click(function(){
             typear = $(this).data('typea');
             var point = $(abs[psy]).text();
@@ -656,6 +671,7 @@ stata();
         document.getElementById("tablo").style.width = "250px";
         document.getElementById("b1").style.opacity = 1;
         document.getElementById("b2").style.opacity = 1;
+         $('.team2Points2').text($('#b2').text());
             $(".remove button").click(function(){
             typear = $(this).data('typea');
             var point = $(abs[psy]).text();
@@ -703,6 +719,7 @@ stata();
         document.getElementById("tablo").style.width = "275px";
         document.getElementById("c1").style.opacity = 1;
         document.getElementById("c2").style.opacity = 1;
+         $('.team2Points3').text($('#c2').text());
             $(".remove button").click(function(){
             typear = $(this).data('typea');
             var point = $(abs[psy]).text();
@@ -750,6 +767,7 @@ stata();
         document.getElementById("tablo").style.width = "300px";
         document.getElementById("d1").style.opacity = 1;
         document.getElementById("d2").style.opacity = 1;
+         $('.team2Points4').text($('#d2').text());
             $(".remove button").click(function(){
             typear = $(this).data('typea');
             var point = $(abs[psy]).text();
@@ -798,6 +816,7 @@ stata();
         document.getElementById("tablo").style.width = "325px";
         document.getElementById("e1").style.opacity = 1;
         document.getElementById("e2").style.opacity = 1;
+         $('.team2Points5').text($('#e2').text());
             $(".remove button").click(function(){
             typear = $(this).data('typea');
             var point = $(abs[psy]).text();
@@ -924,4 +943,82 @@ function radio1(){
 function radio2(){
     document.getElementById("podacha1").style.opacity = 0;
     document.getElementById("podacha2").style.opacity = 1;
+}
+
+var game = {
+    "date" : "",
+    "team1" : "",
+    "team2" : "",
+    "scores" : {
+        "team1" : 0,
+        "team2" : 0,
+        "set1" : {
+            "team1" : 0,
+            "team2" : 0
+        },
+        "total" : {
+            "team1" : 0,
+            "team2" : 0
+        }
+    },
+    "stats" : {
+        "set1" : {
+            "name" : "1 партия",
+            "team1" : {
+                "ошибки соперника" : 0,
+                "эйс" : 0,
+                "атака" : 0,
+                "скидка": 0,
+                "блок": 0
+            },
+            "team2" : {
+                "ошибки соперника" : 0,
+                "эйс" : 0,
+                "атака" : 0,
+                "скидка": 0,
+                "блок": 0
+            },
+            "history" : [
+                {"team": 1, "type" : "эйс"}
+            ]
+        },
+        "total" : {
+            "name" : "вся встреча",
+            "team1" : {
+                "ошибки соперника" : 0,
+                "эйс" : 0,
+                "атака" : 0,
+                "скидка": 0,
+                "блок": 0
+            }
+        }
+    }
+};
+
+
+function download(data, filename, type) {
+    var file = new Blob([data], {type: type});
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+function pickTeam1(element) {
+    var team1Pick = element.data("pick");
+    $("#team1").text(team1Pick);
+    $(".team1name").text(team1Pick);
+    var team1color = element.data("color");
+    $("#team1color").css({'background':'#'+team1color});
+    $("#team1colorCustom").val(team1color);
 }
