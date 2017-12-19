@@ -1,4 +1,13 @@
 $(document).ready(function(){
+
+    $('#save2file').click(function () {
+        saveGameToFile();
+    });
+
+    $('#save2firebase').click(function () {
+        saveGameToFirebase();
+    });
+
                 
         $("#id_").click(function(){
             alert($(this).attr('id'));
@@ -71,15 +80,12 @@ $(document).ready(function(){
         });
         //Выбор команды  1 для добавления в табло
         $('.pick1').click(function(){
-            pickTeam1($(this));
-/*
             var team1Pick = $(this).data("pick");
             $("#team1").text(team1Pick);
             $(".team1name").text(team1Pick);
             var team1color = $(this).data("color");
             $("#team1color").css({'background':'#'+team1color});
             $("#team1colorCustom").val(team1color);
-*/
         });
         //Выбор команды  2 для добавления в табло
         $('.pick2').click(function(){
@@ -946,7 +952,7 @@ function radio2(){
 }
 
 var game = {
-    "date" : "",
+    "date" : null,
     "team1" : "",
     "team2" : "",
     "scores" : {
@@ -956,6 +962,10 @@ var game = {
             "team1" : 0,
             "team2" : 0
         },
+        "set2" : {},
+        "set3" : {},
+        "set4" : {},
+        "set5" : {},
         "total" : {
             "team1" : 0,
             "team2" : 0
@@ -982,6 +992,10 @@ var game = {
                 {"team": 1, "type" : "эйс"}
             ]
         },
+        "set2" : {"team1" : {}, "team2" : {}, "history" : []},
+        "set3" : {"team1" : {}, "team2" : {}, "history" : []},
+        "set4" : {"team1" : {}, "team2" : {}, "history" : []},
+        "set5" : {"team1" : {}, "team2" : {}, "history" : []},
         "total" : {
             "name" : "вся встреча",
             "team1" : {
@@ -1014,11 +1028,91 @@ function download(data, filename, type) {
     }
 }
 
-function pickTeam1(element) {
-    var team1Pick = element.data("pick");
-    $("#team1").text(team1Pick);
-    $(".team1name").text(team1Pick);
-    var team1color = element.data("color");
-    $("#team1color").css({'background':'#'+team1color});
-    $("#team1colorCustom").val(team1color);
+
+function saveGameToFirebase() {
+    updateGame();
+
+    var gameName = game.date + "_" + game.team1 + "_" + game.team2;
+    var gametype = $('input.gameType:checked').attr("value");
+    var url = "https://volleystat-5bc1c.firebaseio.com/volleyorgua/чемпионаты/2017/games/" + gametype + "/" + gameName +".json";
+    $.put(url, JSON.stringify(game), function () {
+        $("#lastSave").html("Последнее сохранение: " + new Date().toLocaleTimeString());
+    }, "application/json");
 }
+
+function updateGame() {
+    if (game.date == null) {
+        var date = new Date();
+        game.date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + "-" + date.getHours();
+        game.team1 = $("#team1").text();
+        game.team2 = $("#team2").text();
+    }
+
+    game.scores.team1 = parseInt($("#point1").text(), 0);
+    game.scores.team2 = parseInt($("#point2").text(), 0);
+
+    game.scores.set1.team1 = parseInt($("#a1").text(), 0);
+    game.scores.set2.team1 = parseInt($("#b1").text(), 0);
+    game.scores.set3.team1 = parseInt($("#c1").text(), 0);
+    game.scores.set4.team1 = parseInt($("#d1").text(), 0);
+    game.scores.set5.team1 = parseInt($("#e1").text(), 0);
+
+    game.scores.set1.team2 = parseInt($("#a2").text(), 0);
+    game.scores.set2.team2 = parseInt($("#b2").text(), 0);
+    game.scores.set3.team2 = parseInt($("#c2").text(), 0);
+    game.scores.set4.team2 = parseInt($("#d2").text(), 0);
+    game.scores.set5.team2 = parseInt($("#e2").text(), 0);
+
+    recalculateScore();
+}
+
+function saveGameToFile() {
+    updateGame();
+    var data = JSON.stringify(game, null, 2);
+    var filename = game.date + "_" + game.team1+"_"+game.team2+".txt";
+    download(data, filename, "text");
+}
+
+function recalculateScore() {
+    game.scores.total.team1 = 0;
+    game.scores.total.team2 = 0;
+
+    addTotalScore(game.scores.set1);
+    addTotalScore(game.scores.set2);
+    addTotalScore(game.scores.set3);
+    addTotalScore(game.scores.set4);
+    addTotalScore(game.scores.set5);
+}
+
+function addTotalScore(set) {
+    if (set == null) {
+        return;
+    }
+
+    game.scores.total.team1 += null2Zero(set.team1);
+    game.scores.total.team2 += null2Zero(set.team2);
+}
+
+function null2Zero(value) {
+    if (value == null) {
+        return 0;
+    }
+    return value;
+}
+
+$.put = function(url, data, callback, type){
+
+    if ( $.isFunction(data) ){
+        type = type || callback,
+            callback = data,
+            data = {}
+    }
+
+    return $.ajax({
+        url: url,
+        type: 'PUT',
+        success: callback,
+        data: data,
+        contentType: type
+    });
+};
