@@ -975,18 +975,18 @@ var game = {
         "set1" : {
             "name" : "1 партия",
             "team1" : {
-                "ошибки соперника" : 0,
-                "эйс" : 0,
-                "атака" : 0,
-                "скидка": 0,
-                "блок": 0
+                "error" : 0,
+                "ace" : 0,
+                "attack" : 0,
+                "tip": 0,
+                "block": 0
             },
             "team2" : {
-                "ошибки соперника" : 0,
-                "эйс" : 0,
-                "атака" : 0,
-                "скидка": 0,
-                "блок": 0
+                "error" : 0,
+                "ace" : 0,
+                "attack" : 0,
+                "tip": 0,
+                "block": 0
             },
             "history" : [
                 {"team": 1, "type" : "эйс"}
@@ -999,12 +999,13 @@ var game = {
         "total" : {
             "name" : "вся встреча",
             "team1" : {
-                "ошибки соперника" : 0,
-                "эйс" : 0,
-                "атака" : 0,
-                "скидка": 0,
-                "блок": 0
-            }
+                "error" : 0,
+                "ace" : 0,
+                "attack" : 0,
+                "tip": 0,
+                "block": 0
+            },
+            "team2" : {}
         }
     }
 };
@@ -1048,22 +1049,91 @@ function updateGame() {
         game.team2 = $("#team2").text();
     }
 
+    //счет по партиям
     game.scores.team1 = parseInt($("#point1").text(), 0);
     game.scores.team2 = parseInt($("#point2").text(), 0);
 
-    game.scores.set1.team1 = parseInt($("#a1").text(), 0);
-    game.scores.set2.team1 = parseInt($("#b1").text(), 0);
-    game.scores.set3.team1 = parseInt($("#c1").text(), 0);
-    game.scores.set4.team1 = parseInt($("#d1").text(), 0);
-    game.scores.set5.team1 = parseInt($("#e1").text(), 0);
+    //счет в партиях
+    game.scores.set1.team1 = parseInt($(".team1Points1").text(), 0);
+    game.scores.set2.team1 = parseInt($(".team1Points2").text(), 0);
+    game.scores.set3.team1 = parseInt($(".team1Points3").text(), 0);
+    game.scores.set4.team1 = parseInt($(".team1Points4").text(), 0);
+    game.scores.set5.team1 = parseInt($(".team1Points5").text(), 0);
+    game.scores.set1.team2 = parseInt($(".team2Points1").text(), 0);
+    game.scores.set2.team2 = parseInt($(".team2Points2").text(), 0);
+    game.scores.set3.team2 = parseInt($(".team2Points3").text(), 0);
+    game.scores.set4.team2 = parseInt($(".team2Points4").text(), 0);
+    game.scores.set5.team2 = parseInt($(".team2Points5").text(), 0);
 
-    game.scores.set1.team2 = parseInt($("#a2").text(), 0);
-    game.scores.set2.team2 = parseInt($("#b2").text(), 0);
-    game.scores.set3.team2 = parseInt($("#c2").text(), 0);
-    game.scores.set4.team2 = parseInt($("#d2").text(), 0);
-    game.scores.set5.team2 = parseInt($("#e2").text(), 0);
+    game.scores.total.team1 = parseInt($('.team1PointsAll').text(), 0);
+    game.scores.total.team2 = parseInt($('.team2PointsAll').text(), 0);
 
-    recalculateScore();
+    //статистика команда 1
+    game.stats.set1.team1.ace = $(".команда1_партия1_Эйс").text();
+    game.stats.set1.team1.attack = $(".команда1_партия1_Атака").text();
+    game.stats.set1.team1.tip = $(".команда1_партия1_Скидка").text();
+    game.stats.set1.team1.block = $(".команда1_партия1_Блок").text();
+    game.stats.set1.team1.error = $(".команда1_партия1_Ошибка").text();
+    game.stats.set2.team1.ace = $(".команда1_партия2_Эйс").text();
+    game.stats.set2.team1.attack = $(".команда1_партия2_Атака").text();
+    game.stats.set2.team1.tip = $(".команда1_партия2_Скидка").text();
+    game.stats.set2.team1.block = $(".команда1_партия2_Блок").text();
+    game.stats.set2.team1.error = $(".команда1_партия2_Ошибка").text();
+    game.stats.set3.team1.ace = $(".команда1_партия3_Эйс").text();
+    game.stats.set3.team1.attack = $(".команда1_партия3_Атака").text();
+    game.stats.set3.team1.tip = $(".команда1_партия3_Скидка").text();
+    game.stats.set3.team1.block = $(".команда1_партия3_Блок").text();
+    game.stats.set3.team1.error = $(".команда1_партия3_Ошибка").text();
+    game.stats.set4.team1.ace = $(".команда1_партия4_Эйс").text();
+    game.stats.set4.team1.attack = $(".команда1_партия4_Атака").text();
+    game.stats.set4.team1.tip = $(".команда1_партия4_Скидка").text();
+    game.stats.set4.team1.block = $(".команда1_партия4_Блок").text();
+    game.stats.set4.team1.error = $(".команда1_партия4_Ошибка").text();
+    game.stats.set5.team1.ace = $(".команда1_партия5_Эйс").text();
+    game.stats.set5.team1.attack = $(".команда1_партия5_Атака").text();
+    game.stats.set5.team1.tip = $(".команда1_партия5_Скидка").text();
+    game.stats.set5.team1.block = $(".команда1_партия5_Блок").text();
+    game.stats.set5.team1.error = $(".команда1_партия5_Ошибка").text();
+
+    game.stats.total.team1.ace = $(".команда1_Эйс").text();
+    game.stats.total.team1.attack = $(".команда1_Атака").text();
+    game.stats.total.team1.tip = $(".команда1_Скидка").text();
+    game.stats.total.team1.block = $(".команда1_Блок").text();
+    game.stats.total.team1.error = $(".команда1_Ошибка").text();
+
+
+    //статистика команда 2
+    game.stats.set1.team2.ace = $(".команда2_партия1_Эйс").text();
+    game.stats.set1.team2.attack = $(".команда2_партия1_Атака").text();
+    game.stats.set1.team2.tip = $(".команда2_партия1_Скидка").text();
+    game.stats.set1.team2.block = $(".команда2_партия1_Блок").text();
+    game.stats.set1.team2.error = $(".команда2_партия1_Ошибка").text();
+    game.stats.set2.team2.ace = $(".команда2_партия2_Эйс").text();
+    game.stats.set2.team2.attack = $(".команда2_партия2_Атака").text();
+    game.stats.set2.team2.tip = $(".команда2_партия2_Скидка").text();
+    game.stats.set2.team2.block = $(".команда2_партия2_Блок").text();
+    game.stats.set2.team2.error = $(".команда2_партия2_Ошибка").text();
+    game.stats.set3.team2.ace = $(".команда2_партия3_Эйс").text();
+    game.stats.set3.team2.attack = $(".команда2_партия3_Атака").text();
+    game.stats.set3.team2.tip = $(".команда2_партия3_Скидка").text();
+    game.stats.set3.team2.block = $(".команда2_партия3_Блок").text();
+    game.stats.set3.team2.error = $(".команда2_партия3_Ошибка").text();
+    game.stats.set4.team2.ace = $(".команда2_партия4_Эйс").text();
+    game.stats.set4.team2.attack = $(".команда2_партия4_Атака").text();
+    game.stats.set4.team2.tip = $(".команда2_партия4_Скидка").text();
+    game.stats.set4.team2.block = $(".команда2_партия4_Блок").text();
+    game.stats.set4.team2.error = $(".команда2_партия4_Ошибка").text();
+    game.stats.set5.team2.ace = $(".команда2_партия5_Эйс").text();
+    game.stats.set5.team2.attack = $(".команда2_партия5_Атака").text();
+    game.stats.set5.team2.tip = $(".команда2_партия5_Скидка").text();
+    game.stats.set5.team2.block = $(".команда2_партия5_Блок").text();
+    game.stats.set5.team2.error = $(".команда2_партия5_Ошибка").text();
+
+    game.stats.total.team2.ace = $(".команда2_Эйс").text();
+    game.stats.total.team2.attack = $(".команда2_Атака").text();
+    game.stats.total.team2.tip = $(".команда2_Скидка").text();
+    game.stats.total.team2.block = $(".команда2_Блок").text();
+    game.stats.total.team2.error = $(".команда2_Ошибка").text();
 }
 
 function saveGameToFile() {
@@ -1071,33 +1141,6 @@ function saveGameToFile() {
     var data = JSON.stringify(game, null, 2);
     var filename = game.date + "_" + game.team1+"_"+game.team2+".txt";
     download(data, filename, "text");
-}
-
-function recalculateScore() {
-    game.scores.total.team1 = 0;
-    game.scores.total.team2 = 0;
-
-    addTotalScore(game.scores.set1);
-    addTotalScore(game.scores.set2);
-    addTotalScore(game.scores.set3);
-    addTotalScore(game.scores.set4);
-    addTotalScore(game.scores.set5);
-}
-
-function addTotalScore(set) {
-    if (set == null) {
-        return;
-    }
-
-    game.scores.total.team1 += null2Zero(set.team1);
-    game.scores.total.team2 += null2Zero(set.team2);
-}
-
-function null2Zero(value) {
-    if (value == null) {
-        return 0;
-    }
-    return value;
 }
 
 $.put = function(url, data, callback, type){
