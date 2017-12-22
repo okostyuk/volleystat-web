@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="js/jQuery.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style1.css">
+<script src="js/js.js"></script>
+<script src="js/jscolor.js"></script>
+<html>
+<body>
+<!--Отображаемое табло-->
+<div class="chromaKey">
+<div id=tablo class="tablo">
+    <p>
+    <img id="podacha1" class="podacha p1" src="img/vball.png" alt="мяч" style="width:20px;height:15px;">
+    <span class="teamname team1" id="team1">DreamTeam 1</span><span class="teamcolor" id="team1color"></span>
+    <strong class="point" id="point1">0</strong>
+        <span class="point" id="a1">0</span>
+        <span class="point" id="b1">0</span>
+        <span class="point" id="c1">0</span>
+        <span class="point" id="d1">0</span>
+        <span class="point" id="e1">0</span>
+        <span class="point" id="f1">0</span></p>
+    <p id="svet" class="svet1">
+        <span class="svet party1win" id="svet1">&nbsp;</span>
+        <span class="svet party2win" id="svet2">&nbsp;</span>
+        <span class="svet party3win" id="svet3">&nbsp;</span>
+        <span class="svet party4win" id="svet4">&nbsp;</span>
+        <span class="svet party5win" id="svet5">&nbsp;</span></p>
+    <p>
+    <img id="podacha2" class="podacha p2" src="img/vball.png" alt="мяч" style="width:20px;height:15px;">
+    <span class="teamname team2" id="team2">DreamTeam 2</span><span class="teamcolor" id="team2color"></span>
+        <strong class="point" id="point2">0</strong>
+        <span class="point" id="a2">0</span>
+        <span class="point" id="b2">0</span>
+        <span class="point" id="c2">0</span>
+        <span class="point" id="d2">0</span>
+        <span class="point" id="e2">0</span>
+        <span class="point" id="f2">0</span></p>
+    </div>   
+</div> 
+<img id="refresh" class="refresh" src="img/refresh.png" alt="Обновить" style="width:58px">
+<img id="logo" class="logo" src="img/logo-dneprvolley.png" alt="Logo" style="width:80px">
+<div class="wrap stats">
+    <label id="lastSave">Последнее сохранение: никогда</label><br/>
+    <div class="statistikaVstrechi">Статистика встречи <br> 
+
+    <div class="team1PointsAll mid stata">0</div><div class="team2PointsAll mid stata">0</div>   <br>
+
+        <div class="team1name stata"></div><div class="team2name stata"></div>   <br>
+        <div class="stata left команда1_Ошибка">0</div><div class="stata mid">Ошибка прот.</div><div class="stata команда2_Ошибка">0</div><br>
+        <div class="stata команда1_Эйс">0</div><div class="stata mid">Эйс-подача</div><div class="stata команда2_Эйс">0</div><br>
+        <div class="stata команда1_Атака">0</div><div class="stata mid">Атака</div><div class="stata команда2_Атака">0</div><br>
+        <div class="stata команда1_Скидка">0</div><div class="stata mid">Скидка</div><div class="stata команда2_Скидка">0</div><br>
+        <div class="stata команда1_Блок">0</div><div class="stata mid">Блок</div><div class="stata команда2_Блок">0</div>
+    </div>
+
+    <div class="statistikaPoPartii1">Партия 1<br> 
+
+    <div class="team1Points1 mid stata">0</div><div class="team2Points1 mid stata">0</div>   <br>
+    
+    <div class="team1name stata"></div><div class="team2name stata"></div>    <br>
+        <div class="stata left команда1_партия1_Ошибка">0</div><div class="stata mid">Ошибка прот.</div><div class="stata команда2_партия1_Ошибка">0</div><br>
+        <div class="stata команда1_партия1_Эйс">0</div><div class="stata mid">Эйс-подача</div><div class="stata команда2_партия1_Эйс">0</div><br>
+        <div class="stata команда1_партия1_Атака">0</div><div class="stata mid">Атака</div><div class="stata команда2_партия1_Атака">0</div><br>
+        <div class="stata команда1_партия1_Скидка">0</div><div class="stata mid">Скидка</div><div class="stata команда2_партия1_Скидка">0</div><br>
+        <div class="stata команда1_партия1_Блок">0</div><div class="stata mid">Блок</div><div class="stata команда2_партия1_Блок">0</div>
+    </div>
+    <div class="statistikaPoPartii2">Партия 2<br> 
+
+    <div class="team1Points2 mid stata">0</div><div class="team2Points2 mid stata">0</div>   <br>
+    
+    <div class="team1name stata"></div><div class="team2name stata"></div>    <br>
+        <div class="stata left команда1_партия2_Ошибка">0</div><div class="stata mid">Ошибка прот.</div><div class="stata команда2_партия2_Ошибка">0</div><br>
+        <div class="stata команда1_партия2_Эйс">0</div><div class="stata mid">Эйс-подача</div><div class="stata команда2_партия2_Эйс">0</div><br>
+        <div class="stata команда1_партия2_Атака">0</div><div class="stata mid">Атака</div><div class="stata команда2_партия2_Атака">0</div><br>
+        <div class="stata команда1_партия2_Скидка">0</div><div class="stata mid">Скидка</div><div class="stata команда2_партия2_Скидка">0</div><br>
+        <div class="stata команда1_партия2_Блок">0</div><div class="stata mid">Блок</div><div class="stata команда2_партия2_Блок">0</div>
+    </div>
+    <div class="statistikaPoPartii3">Партия 3<br> 
+
+    <div class="team1Points3 mid stata">0</div><div class="team2Points3 mid stata">0</div>   <br>
+    
+    <div class="team1name stata"></div><div class="team2name stata"></div>    <br>
+        <div class="stata left команда1_партия3_Ошибка">0</div><div class="stata mid">Ошибка прот.</div><div class="stata команда2_партия3_Ошибка">0</div><br>
+        <div class="stata команда1_партия3_Эйс">0</div><div class="stata mid">Эйс-подача</div><div class="stata команда2_партия3_Эйс">0</div><br>
+        <div class="stata команда1_партия3_Атака">0</div><div class="stata mid">Атака</div><div class="stata команда2_партия3_Атака">0</div><br>
+        <div class="stata команда1_партия3_Скидка">0</div><div class="stata mid">Скидка</div><div class="stata команда2_партия3_Скидка">0</div><br>
+        <div class="stata команда1_партия3_Блок">0</div><div class="stata mid">Блок</div><div class="stata команда2_партия3_Блок">0</div>
+    </div>
+    <div class="statistikaPoPartii4">Партия 4<br> 
+
+    <div class="team1Points4 mid stata">0</div><div class="team2Points4 mid stata">0</div>   <br>
+    
+    <div class="team1name stata"></div><div class="team2name stata"></div>    <br>
+        <div class="stata left команда1_партия4_Ошибка">0</div><div class="stata mid">Ошибка прот.</div><div class="stata команда2_партия4_Ошибка">0</div><br>
+        <div class="stata команда1_партия4_Эйс">0</div><div class="stata mid">Эйс-подача</div><div class="stata команда2_партия4_Эйс">0</div><br>
+        <div class="stata команда1_партия4_Атака">0</div><div class="stata mid">Атака</div><div class="stata команда2_партия4_Атака">0</div><br>
+        <div class="stata команда1_партия4_Скидка">0</div><div class="stata mid">Скидка</div><div class="stata команда2_партия4_Скидка">0</div><br>
+        <div class="stata команда1_партия4_Блок">0</div><div class="stata mid">Блок</div><div class="stata команда2_партия4_Блок">0</div>
+    </div>
+    <div class="statistikaPoPartii5">Партия 5<br> 
+
+    <div class="team1Points5 mid stata">0</div><div class="team2Points5 mid stata">0</div>   <br>
+    
+    <div class="team1name stata"></div><div class="team2name stata"></div>    <br>
+        <div class="stata left команда1_партия5_Ошибка">0</div><div class="stata mid">Ошибка прот.</div><div class="stata команда2_партия5_Ошибка">0</div><br>
+        <div class="stata команда1_партия5_Эйс">0</div><div class="stata mid">Эйс-подача</div><div class="stata команда2_партия5_Эйс">0</div><br>
+        <div class="stata команда1_партия5_Атака">0</div><div class="stata mid">Атака</div><div class="stata команда2_партия5_Атака">0</div><br>
+        <div class="stata команда1_партия5_Скидка">0</div><div class="stata mid">Скидка</div><div class="stata команда2_партия5_Скидка">0</div><br>
+        <div class="stata команда1_партия5_Блок">0</div><div class="stata mid">Блок</div><div class="stata команда2_партия5_Блок">0</div>
+    </div>
+
+    
+</div>
+
+<!--Отображаемое табло-->
+<!--Separator-->
+<!--Вспомогательныая панель-->
+<div class="CP CP1"><div class=inline>
+    <div class="inline"><input id="team1name" oninput="team1name()" tabindex="1" placeholder="DreamTeam 1"></div>
+    <div class="inline"><button type="button" onclick="morePointForTeam1()" accesskey="q">+</button></div>
+    <div class="inline"><button type="button" onclick="lessPointForTeam1()" accesskey="w">-</button></div></div>
+    <div class="inline vibor_cveta">
+        <div id="team1color1" class="color col1" data-col='FF0000'></div>
+        <div id="team1color2" class="color col1" data-col='000099'></div>
+        <div id="team1color3" class="color col1" data-col='FFFFFF'></div>
+        <div id="team1color4" class="color col1" data-col='FF9700'></div>
+        <div id="team1color5" class="color col1" data-col='00FFFF'></div>
+        <div id="team1color6" class="color col1" data-col='FFFF00'></div>
+    </div>
+    <div class="inline"><input id="team1colorCustom" class="jscolor team1colorCustom input_cp"></div>
+</div>
+<div class="CP CP2">
+    <input id="team2name" onchange="team2name()" tabindex="2" placeholder="DreamTeam 2">
+    <button type="button" onclick="morePointForTeam2()" accesskey="a">+</button>
+    <button type="button" onclick="lessPointForTeam2()" accesskey="s">-</button>
+     <div class="inline vibor_cveta">
+        <div id="team2color1" class="color col2" data-col='FF0000'></div>
+        <div id="team2color2" class="color col2" data-col='000099'></div>
+        <div id="team2color3" class="color col2" data-col='FFFFFF'></div>
+        <div id="team2color4" class="color col2" data-col='FF9700'></div>
+        <div id="team2color5" class="color col2" data-col='00FFFF'></div>
+        <div id="team2color6" class="color col2" data-col='FFFF00'></div>
+    </div>
+    <input id="team2colorCustom" class="jscolor team2colorCustom input_cp">
+</div>
+<div class="game">Счет в партии
+<br>    <input class="input partyscore1" id=SCORE1 value=0>
+<div>   <input class="input partyscore2" id=SCORE2 value=0></div></div>
+<div class="game">Счет в игре<br>
+        <input class="input gamescore1" id=GSCORE1 value=0>
+            <button type="button" onclick="moreparty()" accesskey="">+</button>
+            <button type="button" onclick="lessparty1()" accesskey="">-</button>
+<div>   <input class="input gamescore2" id=GSCORE2 value=0>
+            <button type="button" onclick="moreparty2()" accesskey="">+</button>
+            <button type="button" onclick="lessparty2()" accesskey="">-</button></div></div>
+
+            <div class="grafik">
+            <div>
+                <div class="sgraf1 T1View"></div>
+                <div class="sgraf2 T2View"></div>
+            </div>
+            </div>
+
+<form id="pickGame" class="list">
+    <label class="pickGame">
+        <input type="radio" class="gameType" name="group1" value="первая группа" checked>
+        первая группа
+    </label>
+    <br/>
+    <label class="pickGame">
+        <input type="radio" class="gameType" name="group1" value="вторая группа">
+        вторая группа
+    </label >
+    <br>
+    <label class="pickGame">
+        <input type="radio" class="gameType" name="group1" value="стыковочные игры">
+        стыковочные игры
+    </label>
+    <br/>
+    <label class="pickGame">
+        <input type="radio" class="gameType" name="group1" value="кубок">
+        кубок
+    </label>
+</form>
+
+<br/>
+<div class="list">Первая группа<br>
+    <div class="slim"><div class="pickTeam pick1" data-color="4aff36" data-pick="Rhino"></div>Rhino<div data-color="4aff36" class="pickTeam pick2" data-pick="Rhino"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="0E0077" data-pick="ВК Меркурий"></div>ВК Меркурий<div class="pickTeam pick2" data-color="0E0077" data-pick="ВК Меркурий"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FF0000" data-pick="Газовик"></div>Газовик<div class="pickTeam pick2" data-color="FF0000" data-pick="Газовик"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FF9700" data-pick="Гелиос"></div>Гелиос<div class="pickTeam pick2" data-color="FF9700" data-pick="Гелиос"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FF0000" data-pick="КБ Южное"></div>КБ Южное<div class="pickTeam pick2" data-color="FF0000" data-pick="КБ Южное"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="000000" data-pick="Люди в черном"></div>Люди в черном<div class="pickTeam pick2" data-color="000000" data-pick="Люди в черном"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FFFF00" data-pick="Павлоградуголь"></div>Павлоградуголь<div class="pickTeam pick2" data-color="FFFF00" data-pick="Павлоградуголь"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="000099" data-pick="Синергия"></div>Синергия<div class="pickTeam pick2" data-color="000099" data-pick="Синергия"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="000099" data-pick="Сокол"></div>Сокол<div class="pickTeam pick2" data-color="000099" data-pick="Сокол"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FFFFFF" data-pick="Факел"></div>Факел<div class="pickTeam pick2" data-color="FFFFFF" data-pick="Факел"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="000055" data-pick="Энергия"></div>Энергия<div class="pickTeam pick2" data-color="000055" data-pick="Энергия"></div></div>
+</div>
+<div class="list">Вторая группа<br>
+    <div class="slim"><div class="pickTeam pick1" data-color="000099" data-pick="Alliance"></div>Alliance<div class="pickTeam pick2" data-color="000099" data-pick="Alliance"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FFFF00" data-pick="Red Stone"></div>Red Stone<div class="pickTeam pick2" data-color="FFFF00" data-pick="Red Stone"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="000099" data-pick="Адреналин"></div>Адреналин<div class="pickTeam pick2" data-color="000099" data-pick="Адреналин"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="0CDD10" data-pick="ВК Восход"></div>ВК Восход<div class="pickTeam pick2" data-color="0CDD10" data-pick="ВК Восход"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="000000" data-pick="ВК Динамик"></div>ВК Динамик<div class="pickTeam pick2" data-color="000000" data-pick="ВК Динамик"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="00FFFF" data-pick="ВК Олимп"></div>ВК Олимп<div class="pickTeam pick2" data-color="00FFFF" data-pick="ВК Олимп"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="000099" data-pick="ВК Орешки"></div>ВК Орешки<div class="pickTeam pick2" data-color="000099" data-pick="ВК Орешки"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FFFF00" data-pick="ВК Решкут"></div>ВК Решкут<div class="pickTeam pick2" data-color="FFFF00" data-pick="ВК Решкут"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FFFF00" data-pick="Злагода"></div>Злагода<div class="pickTeam pick2" data-color="FFFF00" data-pick="Злагода"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="000000" data-pick="Молния"></div>Молния<div class="pickTeam pick2" data-color="000000" data-pick="Молния"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FFFFFF" data-pick="Новомосковскгаз"></div>Новомосковскгаз<div class="pickTeam pick2" data-color="FFFFFF" data-pick="Новомосковскгаз"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FFFFFF" data-pick="Новый Горизонт"></div>Новый Горизонт<div class="pickTeam pick2" data-color="FFFFFF" data-pick="Новый Горизонт"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FF0000" data-pick="Парус"></div>Парус<div class="pickTeam pick2" data-color="FF0000" data-pick="Парус"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FF6633" data-pick="Прайд"></div>Прайд<div class="pickTeam pick2" data-color="FF6633" data-pick="Прайд"></div></div>
+    <div class="slim"><div class="pickTeam pick1" data-color="FFFFFF" data-pick="Шторм"></div>Шторм<div class="pickTeam pick2" data-color="FFFFFF" data-pick="Шторм"></div></div>
+</div>
+<br/>
+<button id="save2file">Сохранить в файл</button>
+<button id="save2firebase">Сохранить в базу</button>
