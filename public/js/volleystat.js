@@ -8,11 +8,82 @@ var config = {
 window.onload = firebaseInit();
 var provider;
 
+var games;
+
 function firebaseInit() {
     firebase.initializeApp(config);
     provider = new firebase.auth.GoogleAuthProvider();
     window.firebase = firebase;
     console.log("firebaseInit()");
+}
+
+function loadGamesNew() {
+    $.get(
+        "https://volleystat-5bc1c.firebaseio.com/volleyorgua/чемпионаты/2017/games.json?print=pretty",
+        null,
+        function (data) {
+            $("#preloader").hide();
+            games = data;
+            var keyNames = Object.keys(data);
+            var gamesDiv = $('#games');
+            gamesDiv.empty();
+
+            for(var gameType in data) {
+                var games = data[gameType];
+                var gamesArray = [];
+                var gameIds = [];
+                for (var gameId in games) {
+                    var gameObj = games[gameId];
+                    gamesArray.push(gameObj);
+                    gameIds.push(gameId);
+                }
+
+                var gameTableId = guidGenerator();
+                addGamesTable(gameTableId, gameType);
+                var gameTable = $("#" + gameTableId);
+
+                gameTable.DataTable( {
+                    "paging":   false,
+                    "stateSave" : true,
+                    select: { style: 'single'},
+                    autoWidth: false,
+                    ordering: false,
+                    "data" : gameIds,
+                    "columns" : [{
+                        data: function (gameId) {
+                            var game = games[gameId];
+                            return game.team1 + " - " + game.team2 + " " +
+                                "(" + game.scores.team1 + " : " + game.scores.team2 + ")";
+                        }
+                    }]
+                });
+            }
+        })
+}
+
+function addGamesTable(tableId, gameType) {
+    //$('#game-tables').append("<H3>"+gameType+"</H3><br/>");
+
+    var tableTag = document.createElement("table");
+    tableTag.setAttribute("id", tableId);
+    tableTag.setAttribute("class", "display");
+    tableTag.setAttribute("cellspacing", "0");
+    //tableTag.appendTo($('#container'));
+    document.getElementById('game-tables').appendChild(tableTag);
+
+    var thead = "<thead><tr><th>" + gameType + "</th></tr></thead>";
+    var caption = "<caption>" + gameType + "</caption>";
+    //$("#" + tableId).append(caption);
+    $("#" + tableId).append(thead);
+
+    return tableTag;
+}
+
+function guidGenerator() {
+    var S4 = function() {
+        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
 
 function loadGames() {
