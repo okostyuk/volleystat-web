@@ -62,18 +62,179 @@
 
     <div class="container">
         <div id="page-body" style="width: 100%; display: inline;">
-            <div id="game-tables" style="width: 50%; display: inline-block; *display: inline;"></div>
-            <div id="stats-div" style="width: 45%; display: inline-block; vertical-align: top; horiz-align: center">
+            <div id="game-tables" >
+                <table id="group1gamesTable"><thead><tr><td>1 группа</td></tr></thead></table><br/>
+                <table id="group2gamesTable"><thead><tr><td>2 группа</td></tr></thead></table><br/>
+                <table id="championshipGamesTable"><thead><tr><td>Чемпионат</td></tr></thead></table><br/>
+                <table id="otherGamesTable"><thead><tr><td>Стыковочные игры</td></tr></thead></table><br/>
+            </div>
+            <div id="stats-div" >
                 <table class="stat-table table" id="stat-table-total">
                     <caption>Статистика встречи</caption>
                     <thead>
                         <tr>
-                            <th>Team 1</th><th></th><th>Team 2</th>
+                            <th class="team1 teamName">Team 1</th><th></th><th class="team2 teamName">Team 2</th>
+                        </tr>
+                        <tr>
+                            <th class="team1 points">0</th><th></th><th class="team2 points">0</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="team1-error">0</td><td class="point-name">Ошибка соперника</td><td class="team2-error">0</td></tr>
+                            <td class="team1 error">0</td><td class="point-name">Ошибка соперника</td><td class="team2 error">0</td>
+                        </tr>
+                        <tr>
+                            <td class="team1 ace">0</td><td class="point-name">Эйс подача</td><td class="team2 ace">0</td>
+                        </tr>
+                        <tr>
+                            <td class="team1 attack">0</td><td class="point-name">Атака</td><td class="team2 attack">0</td>
+                        </tr>
+                        <tr>
+                            <td class="team1 tip">0</td><td class="point-name">Скидка</td><td class="team2 tip">0</td>
+                        </tr>
+                        <tr>
+                            <td class="team1 block">0</td><td class="point-name">Блок</td><td class="team2 block">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="stat-table table" id="stat-table-set1">
+                    <caption>1 партия</caption>
+                    <thead>
+                        <tr>
+                            <th class="team1 teamName">Team 1</th><th></th><th class="team2 teamName">Team 2</th>
+                        </tr>
+                        <tr>
+                            <th class="team1 points">0</th><th></th><th class="team2 points">0</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="team1 error">0</td><td class="point-name">Ошибка соперника</td><td class="team2 error">0</td>
+                        </tr>
+                        <tr>
+                            <td class="team1 ace">0</td><td class="point-name">Эйс подача</td><td class="team2 ace">0</td>
+                        </tr>
+                        <tr>
+                            <td class="team1 attack">0</td><td class="point-name">Атака</td><td class="team2 attack">0</td>
+                        </tr>
+                        <tr>
+                            <td class="team1 tip">0</td><td class="point-name">Скидка</td><td class="team2 tip">0</td>
+                        </tr>
+                        <tr>
+                            <td class="team1 block">0</td><td class="point-name">Блок</td><td class="team2 block">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="stat-table table" id="stat-table-set2">
+                    <caption>2 партия</caption>
+                    <thead>
+                    <tr>
+                        <th class="team1 teamName">Team 1</th><th></th><th class="team2 teamName">Team 2</th>
+                    </tr>
+                    <tr>
+                        <th class="team1 points">0</th><th></th><th class="team2 points">0</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="team1 error">0</td><td class="point-name">Ошибка соперника</td><td class="team2 error">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 ace">0</td><td class="point-name">Эйс подача</td><td class="team2 ace">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 attack">0</td><td class="point-name">Атака</td><td class="team2 attack">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 tip">0</td><td class="point-name">Скидка</td><td class="team2 tip">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 block">0</td><td class="point-name">Блок</td><td class="team2 block">0</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="stat-table table" id="stat-table-set3">
+                    <caption>3 партия</caption>
+                    <thead>
+                    <tr>
+                        <th class="team1 teamName">Team 1</th><th></th><th class="team2 teamName">Team 2</th>
+                    </tr>
+                    <tr>
+                        <th class="team1 points">0</th><th></th><th class="team2 points">0</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="team1 error">0</td><td class="point-name">Ошибка соперника</td><td class="team2 error">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 ace">0</td><td class="point-name">Эйс подача</td><td class="team2 ace">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 attack">0</td><td class="point-name">Атака</td><td class="team2 attack">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 tip">0</td><td class="point-name">Скидка</td><td class="team2 tip">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 block">0</td><td class="point-name">Блок</td><td class="team2 block">0</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="stat-table table" id="stat-table-set4">
+                    <caption>4 партия</caption>
+                    <thead>
+                    <tr>
+                        <th class="team1 teamName">Team 1</th><th></th><th class="team2 teamName">Team 2</th>
+                    </tr>
+                    <tr>
+                        <th class="team1 points">0</th><th></th><th class="team2 points">0</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="team1 error">0</td><td class="point-name">Ошибка соперника</td><td class="team2 error">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 ace">0</td><td class="point-name">Эйс подача</td><td class="team2 ace">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 attack">0</td><td class="point-name">Атака</td><td class="team2 attack">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 tip">0</td><td class="point-name">Скидка</td><td class="team2 tip">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 block">0</td><td class="point-name">Блок</td><td class="team2 block">0</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="stat-table table" id="stat-table-set5">
+                    <caption>5 партия</caption>
+                    <thead>
+                    <tr>
+                        <th class="team1 teamName">Team 1</th><th></th><th class="team2 teamName">Team 2</th>
+                    </tr>
+                    <tr>
+                        <th class="team1 points">0</th><th></th><th class="team2 points">0</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="team1 error">0</td><td class="point-name">Ошибка соперника</td><td class="team2 error">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 ace">0</td><td class="point-name">Эйс подача</td><td class="team2 ace">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 attack">0</td><td class="point-name">Атака</td><td class="team2 attack">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 tip">0</td><td class="point-name">Скидка</td><td class="team2 tip">0</td>
+                    </tr>
+                    <tr>
+                        <td class="team1 block">0</td><td class="point-name">Блок</td><td class="team2 block">0</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

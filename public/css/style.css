@@ -1,7 +1,4 @@
 
-.team1-error {
-    text-align: right;
-}
 
 .team2-error {
     horiz-align: left;
@@ -12,6 +9,30 @@
     text-align: center;
 }
 
-.stat-table {
+.stat-table .team1{
+    width: 35%;
+    text-align: right;
+}
 
+.stat-table .team2{
+    width: 35%;
+    text-align: left;
+}
+
+#game-tables {
+    width: 25%; display: inline-block; *display: inline;
+}
+
+#stats-div {
+    width: 72%; display: inline-block; vertical-align: top; horiz-align: center; padding-left: 20px
+}
+
+.stat-table {
+    display: inline-block; *display: inline;
+    width: 45%;
+}
+
+caption {
+    text-align: center;
+    padding: 0;
 }
