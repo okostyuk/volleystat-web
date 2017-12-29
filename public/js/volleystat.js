@@ -9,6 +9,7 @@ window.onload = firebaseInit();
 var provider;
 
 var gamesFromServer;
+var selectedGame;
 
 function firebaseInit() {
     firebase.initializeApp(config);
@@ -97,7 +98,25 @@ function loadGamesNew() {
         })
 }
 
+var emptySet = {
+    "team1" : {
+        "ace" : "0",
+        "attack" : "0",
+        "block" : "0",
+        "error" : "0",
+        "tip" : "0"
+    },
+    "team2" : {
+        "ace" : "0",
+        "attack" : "0",
+        "block" : "0",
+        "error" : "0",
+        "tip" : "0"
+    }
+}
+
 function displayStat(gameType, gameId) {
+    $("#stats-div").show();
     var game = gamesFromServer[gameType][gameId];
 
     $(".teamName.team1").each(function () {
@@ -109,26 +128,51 @@ function displayStat(gameType, gameId) {
         $( this ).html(game.team2);
     });
 
+    if (game.stats.total == null || game.stats.total.team1 == null || game.stats.total.team2 == null) {
+        game.stats.total = emptySet;
+    }
+
+    if (game.stats.set1 == null || game.stats.set1.team1 == null || game.stats.set1.team2 == null) {
+        game.stats.set1 = emptySet;
+    }
+    if (game.stats.set2 == null || game.stats.set2.team1 == null || game.stats.set2.team2 == null) {
+        game.stats.set2 = emptySet;
+    }
+    if (game.stats.set3 == null || game.stats.set3.team1 == null || game.stats.set3.team2 == null) {
+        game.stats.set3 = emptySet;
+    }
+    if (game.stats.set4 == null || game.stats.set4.team1 == null || game.stats.set4.team2 == null) {
+        game.stats.set4 = emptySet;
+    }
+    if (game.stats.set5 == null || game.stats.set5.team1 == null || game.stats.set5.team2 == null) {
+        game.stats.set5 = emptySet;
+    }
+
     $(".team1.points", "#stat-table-total ").html(game.scores.total.team1);
     $(".team2.points", "#stat-table-total ").html(game.scores.total.team2);
+
     $(".team1.error", "#stat-table-total ").html(game.stats.total.team1.error);
     $(".team1.attack", "#stat-table-total ").html(game.stats.total.team1.attack);
     $(".team1.block", "#stat-table-total ").html(game.stats.total.team1.block);
     $(".team1.tip", "#stat-table-total ").html(game.stats.total.team1.tip);
     $(".team1.ace", "#stat-table-total ").html(game.stats.total.team1.ace);
+
     $(".team2.error", "#stat-table-total ").html(game.stats.total.team2.error);
     $(".team2.attack", "#stat-table-total ").html(game.stats.total.team2.attack);
     $(".team2.block", "#stat-table-total ").html(game.stats.total.team2.block);
     $(".team2.tip", "#stat-table-total ").html(game.stats.total.team2.tip);
     $(".team2.ace", "#stat-table-total ").html(game.stats.total.team2.ace);
 
+
     $(".team1.points", "#stat-table-set1 ").html(game.scores.set1.team1);
     $(".team2.points", "#stat-table-set1 ").html(game.scores.set1.team2);
+
     $(".team1.error", "#stat-table-set1 ").html(game.stats.set1.team1.error);
     $(".team1.attack", "#stat-table-set1 ").html(game.stats.set1.team1.attack);
     $(".team1.block", "#stat-table-set1 ").html(game.stats.set1.team1.block);
     $(".team1.tip", "#stat-table-set1 ").html(game.stats.set1.team1.tip);
     $(".team1.ace", "#stat-table-set1 ").html(game.stats.set1.team1.ace);
+
     $(".team2.error", "#stat-table-set1 ").html(game.stats.set1.team2.error);
     $(".team2.attack", "#stat-table-set1 ").html(game.stats.set1.team2.attack);
     $(".team2.block", "#stat-table-set1 ").html(game.stats.set1.team2.block);

@@ -32,6 +32,7 @@
     <title>Игры</title>
     <script type="application/javascript">
         $(document).ready( function () {
+            $("#stats-div").hide();
             loadGamesNew();
         } );
     </script>
@@ -68,7 +69,7 @@
                 <table id="championshipGamesTable"><thead><tr><td>Чемпионат</td></tr></thead></table><br/>
                 <table id="otherGamesTable"><thead><tr><td>Стыковочные игры</td></tr></thead></table><br/>
             </div>
-            <div id="stats-div" >
+            <div id="stats-div">
                 <table class="stat-table table" id="stat-table-total">
                     <caption>Статистика встречи</caption>
                     <thead>
