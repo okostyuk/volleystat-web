@@ -1,8 +1,8 @@
-*{
+* {
     font-family: tahoma;
 }
 
-.statistikaVstrechi,.statistikaPoPartii1,.statistikaPoPartii2,.statistikaPoPartii3,.statistikaPoPartii4,.statistikaPoPartii5{
+.statistikaVstrechi, .statistikaPoPartii1, .statistikaPoPartii2, .statistikaPoPartii3, .statistikaPoPartii4, .statistikaPoPartii5 {
     position: relative;
     display: inline-block;
     text-align: center;
@@ -12,117 +12,155 @@
     margin: 5px;
     background: url(../img/FON.jpg);
     background-size: cover;
-    border:2px solid white;
-    border-radius:15px;
-    text-shadow: black 3px 3px 8px,black -3px 3px 8px,
-            black -3px -3px 8px,black 3px -3px 8px;
+    border: 2px solid white;
+    border-radius: 15px;
+    text-shadow: black 3px 3px 8px, black -3px 3px 8px,
+    black -3px -3px 8px, black 3px -3px 8px;
 }
-.stata.mid{
+
+.stata.mid {
     width: 120px;
 }
-.team1name.stata,.team2name.stata{
+
+.team1name.stata, .team2name.stata {
     width: 130px;
 }
-.team1name.stata{
+
+.team1name.stata {
     padding-right: 10px;
 }
-.team2name.stata{
+
+.team2name.stata {
     padding-left: 10px;
 }
+
 .stata {
     margin-left: 10px;
     width: 30px;
-    margin-right: 10px; 
+    margin-right: 10px;
     position: relative;
     display: inline-block;
     text-align: center;
 }
 
-.wrap{
-    width:800px;
+.wrap {
+    width: 800px;
     height: 40px;
-    margin:0 auto;
-    
-}
-.statline{
-    max-width:400px;
-}
-.T1,.T2,.T1Btn,.T2Btn,.sgraf1,.sgraf2{
-    width:85px;
-    display:inline-block;
-}
-.T1Btn button,.T2Btn button{
-    width: 100%;
-}
-.sgraf1{
-text-align:right;
-position: relative;
-padding-right: 15px;
+    margin: 0 auto;
 
 }
-.remove{
+
+.statline {
+    max-width: 400px;
+}
+
+.T1, .T2, .T1Btn, .T2Btn, .sgraf1, .sgraf2 {
+    /*min-height: 19px;*/
+    width: 85px;
+    display: inline-block;
+}
+
+.T1Btn button, .T2Btn button {
+    width: 100%;
+}
+
+.sgraf1 {
+    text-align: right;
+    position: relative;
+    padding-right: 15px;
+}
+
+.history-table {
+    visibility: hidden;
+    height: 1px;
+    width: 100%;
+}
+
+.history-table .team1 {
+    min-width: 85px;
+    text-align: right;
+}
+
+.history-table .team2 {
+    min-width: 85px;
+    text-align: left;
+}
+
+.history-table .ball {
+    min-width: 20px;
+}
+
+.remove {
     position: absolute;
 
 }
+
 .remove button {
     width: 70px;
 }
-.sgraf2{
+
+.sgraf2 {
     padding-left: 15px;
     text-align: left;
     position: relative;
 }
-.sgraf1.pipka:after{
+
+.sgraf1.pipka:after {
     content: "";
     position: absolute;
     right: -3px;
-    top:0;
-    width:6px;
-    height: 20px;
-    background: #000;
-}
-.sgraf1.pipka:before{
-    content: "";
-    position: absolute;
-    right: -2px;
-    top:25%;
-    width:12px;
-    height: 12px;
-    background: #000;
-}
-.sgraf2.pipka:after{
-    content: "";
-    position: absolute;
-    left: -3px;
-    top:0;
+    top: 0;
     width: 6px;
     height: 20px;
     background: #000;
 }
-.sgraf2.pipka:before{
+
+.sgraf1.pipka:before {
     content: "";
     position: absolute;
-    left: -2px;
-    top:25%;
-    width:12px;
+    right: -2px;
+    top: 25%;
+    width: 12px;
     height: 12px;
     background: #000;
 }
-.grafik{
+
+.sgraf2.pipka:after {
+    content: "";
+    position: absolute;
+    left: -3px;
+    top: 0;
+    width: 6px;
+    height: 20px;
+    background: #000;
+}
+
+.sgraf2.pipka:before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: 25%;
+    width: 12px;
+    height: 12px;
+    background: #000;
+}
+
+.grafik {
     position: relative;
     padding: 10px;
-    width: 200px;
+    width: 250px;
     background: url(../img/FON.jpg) center;
-    border:2px solid white;
-    border-radius:15px;
+    border: 2px solid white;
+    border-radius: 15px;
     max-height: 388px;
     margin: 3px 0px;
     overflow: hidden;
-    text-shadow: black 3px 3px 8px,black -3px 3px 8px,
-            black -3px -3px 8px,black 3px -3px 8px;
+    text-shadow: black 3px 3px 8px, black -3px 3px 8px,
+    black -3px -3px 8px, black 3px -3px 8px;
 }
-.grafik:after{
-    background: url(../img/FON.jpg) bottom;
+
+.grafik:after {
+    /*background: url(../img/FON.jpg) bottom;*/
     content: '';
     bottom: 2px;
     left: 2px;
@@ -130,36 +168,43 @@ padding-right: 15px;
     position: absolute;
     height: 18px;
 }
-.chromaKey{
+
+.chromaKey {
     width: 510px;
-    background-color:blue;
+    background-color: blue;
 }
-#f1,  #f2{
-margin-left: 40px; 
+
+#f1, #f2 {
+    margin-left: 40px;
 }
-#refresh{
-position: absolute;
-left: 455px;
-top: 20px;
-cursor: pointer;
-transition: 0.6s;
+
+#refresh {
+    position: absolute;
+    left: 455px;
+    top: 20px;
+    cursor: pointer;
+    transition: 0.6s;
 }
-#refresh:hover{
-transform: rotate(-720deg);
+
+#refresh:hover {
+    transform: rotate(-720deg);
 }
-.logo{
-position:absolute;
-left:100px;
-top:20px;
-z-index:2;
+
+.logo {
+    position: absolute;
+    left: 100px;
+    top: 20px;
+    z-index: 2;
 }
-.stats{
-position: absolute;
-left: 550px;
-top: 10px;
+
+.stats {
+    position: absolute;
+    left: 550px;
+    top: 10px;
 
 }
-.pickTeam{
+
+.pickTeam {
     display: inline-block;
     vertical-align: middle;
     margin: 5px;
@@ -168,115 +213,131 @@ top: 10px;
     border: 2px solid black;
     cursor: pointer;
 }
-.pickTeam:hover{
-border: 2px solid white;
+
+.pickTeam:hover {
+    border: 2px solid white;
 }
 
-.pickGame{
+.pickGame {
     display: inline-block;
     vertical-align: middle;
     border: 2px solid transparent;
     cursor: pointer;
 }
 
-.pickGame:hover{
+.pickGame:hover {
     border: 2px solid white;
 }
 
-.TEAMS{
-color: red;
-}
-.slim{
-    height: 16px;
-}
-body{
-    margin:10px;
-    padding:0;
-    background-color: blue;
-    color:white;
+.TEAMS {
+    color: red;
 }
 
-p{
-    width:400px;
-    margin:0;
-    padding:0;/*
-    border:1px solid;*/
+.slim {
+    height: 16px;
+}
+
+body {
+    margin: 10px;
+    padding: 0;
+    background-color: blue;
+    color: white;
+}
+
+p {
+    width: 400px;
+    margin: 0;
+    padding: 0;
+    /*
+        border:1px solid;*/
     font: 16px Sans-serif, bold;
 }
-span{
-    margin:0;
+
+span {
+    margin: 0;
     /*border:2px solid green;*/
-    padding:0px 0px; 
-    height:10px;
-    width:15px;
+    padding: 0px 0px;
+    height: 10px;
+    width: 15px;
 }
-button{
+
+button {
     cursor: pointer;
 }
-.inline{
+
+.inline {
     display: inline-block;
     vertical-align: middle;
 }
-.middle{
+
+.middle {
 }
-.demo{
-    border:1px dotted;
+
+.demo {
+    border: 1px dotted;
     text-align: center;
-    display:inline-block;
-    width:87%;
-    padding:0px;
-    margin:0px;
-    }
-.teamname{
-    display:inline-block;
-    width:150px;
+    display: inline-block;
+    width: 87%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.teamname {
+    display: inline-block;
+    width: 150px;
     text-align: left;
     min-height: 15px;
-    position:relative;
-    z-index:3;
-	text-shadow: black 3px 3px 5px,black -3px 3px 5px,
-			black -3px -3px 5px,black 3px -3px 5px;
+    position: relative;
+    z-index: 3;
+    text-shadow: black 3px 3px 5px, black -3px 3px 5px,
+    black -3px -3px 5px, black 3px -3px 5px;
 }
-.team1{
-   /* background: linear-gradient(to right,#222222 60%, red, yellow);*/
+
+.team1 {
+    /* background: linear-gradient(to right,#222222 60%, red, yellow);*/
     /*border:1px solid;*/
-    height:20px;
-    }
-.podacha{
-    margin:0;
-    padding:0;
-    height:5px;
+    height: 20px;
+}
+
+.podacha {
+    margin: 0;
+    padding: 0;
+    height: 5px;
     width: 5px;
-    display:inline-block;
+    display: inline-block;
     opacity: 0;
     transition: 0.7s;
-    }
-.svet{
-    display:inline-block;
-    padding:0;
-    margin:0;
-    margin-bottom:0px;
+}
+
+.svet {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 0px;
     position: relative;
-    left:203px;
-    height:5px;
-    width:18px;
-    }
-.tablo{
-    background:#222222;
-    display:inline-block;
-    text-align:left;
-    width:225px;
-    padding:3px;
-    margin:10px;
-    border:1px solid white;
+    left: 203px;
+    height: 5px;
+    width: 18px;
+}
+
+.tablo {
+    background: #222222;
+    display: inline-block;
+    text-align: left;
+    width: 225px;
+    padding: 3px;
+    margin: 10px;
+    border: 1px solid white;
     border-radius: 5px;
     transition: 1.0s;
-    }
-.input{
-    text-align:center;
-    width:30px;
-    }
-.{
+}
+
+.input {
+    text-align: center;
+    width: 30px;
+}
+
+/*.{
     position:relative;
     opacity: 0.1;
     display:inline-block;
@@ -286,23 +347,25 @@ button{
     border:1px solid red;
     margin-left:5px;
     padding:5px;
-    }
-.point{
-    margin:0;
-    padding:0;
-    height:16px;
-    width:20px;
-    display:inline-block;
-    text-align:center;
+    }*/
+.point {
+    margin: 0;
+    padding: 0;
+    height: 16px;
+    width: 20px;
+    display: inline-block;
+    text-align: center;
 
 }
-.svet1{
+
+.svet1 {
     height: 4px;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
-.color{
+
+.color {
     border: 2px solid black;
-	padding: 2px;
+    padding: 2px;
     margin-top: 8px;
     display: inline-block;
     height: 18px;
@@ -310,13 +373,15 @@ button{
     cursor: pointer;
     border-radius: 40%;
 }
-.color:hover{
+
+.color:hover {
     border: 2px solid white;
     transition: 0.7s;
 }
-.teamcolor{
-    left:178px;
-    position:absolute;
+
+.teamcolor {
+    left: 178px;
+    position: absolute;
     float: right;
     display: inline-block;
     border: 2px solid gray;
@@ -326,68 +391,86 @@ button{
     border-radius: 40%;
     transition: 1s;
 }
-#team2color{
-    position:absolute;
+
+#team2color {
+    position: absolute;
     background: yellow;
 }
-#team1color1{
+
+#team1color1 {
     background: red;
-} 
-#team1color2{
+}
+
+#team1color2 {
     background: blue;
 }
-#team1color3{
+
+#team1color3 {
     background: white;
 }
-#team1color4{
+
+#team1color4 {
     background: orange;
 }
-#team1color5{
+
+#team1color5 {
     background: lightblue;
 }
-#team1color6{
+
+#team1color6 {
     background: yellow;
 
-} 
-.CP{
+}
+
+.CP {
     background-color: grey;
     margin: 0px 5px;
     height: 40px;
     width: 505px;
 }
-#team2color1{
+
+#team2color1 {
     background: red;
-} 
-#team2color2{
+}
+
+#team2color2 {
     background: blue;
 }
-#team2color3{
+
+#team2color3 {
     background: white;
 }
-#team2color4{
+
+#team2color4 {
     background: orange;
 }
-#team2color5{
+
+#team2color5 {
     background: lightblue;
 }
-#team2color6{
+
+#team2color6 {
     background: yellow;
 }
-#e1, #e2, #b1, #b2, #c1, #c2, #d1, #d2{
+
+#e1, #e2, #b1, #b2, #c1, #c2, #d1, #d2 {
     opacity: 0;
     transition: 1.7s;
 }
-.input_cp{
+
+.input_cp {
     width: 60px;
 }
-.pick{
+
+.pick {
     left: 430px;
     top: 185px;
     position: absolute;
     opacity: 0;
     transition: 1s;
 }
-.radio{
+
+.radio {
     border-radius: 100%;
     border: 1px solid;
     column-rule-color: red;
@@ -395,25 +478,29 @@ button{
     width: 15px;
     background: gray;
 }
-.radio:hover{
+
+.radio:hover {
     cursor: pointer;
     background: radial-gradient(red 40%, yellow, black)
-    }
-.game{
-       border:1px solid green; 
-       display: none;
-    }
-.list{
-	display: inline-block;
+}
+
+.game {
+    border: 1px solid green;
+    display: none;
+}
+
+.list {
+    display: inline-block;
     vertical-align: top;
     width: 229px;
-    border:2px solid white;
+    border: 2px solid white;
     padding: 10px;
 }
 
-li{
-  cursor: pointer;
+li {
+    cursor: pointer;
 }
-.hideblock{
+
+.hideblock {
     display: none;
 }
