@@ -7,6 +7,25 @@ $(document).ready(function() {
     $('#save2firebase').click(function () {
         saveGameToFirebase();
     });
+
+    loadChampionships();
+
+    $("#pickChampionship").change(function () {
+        var champ = $("#pickChampionship").find("option:selected");
+        $('#pickTeamsTable').hide();
+        loadTeams(champ.val());
+    });
+
+    $('#pickTeam1').change(function() {
+        var selected = $("#pickTeam1").find("option:selected");
+        pickTeam1(selected.html());
+    });
+
+    $('#pickTeam2').change(function() {
+        var selected = $("#pickTeam2").find("option:selected");
+        pickTeam2(selected.html());
+    });
+
 });
 
 var game = {
@@ -68,6 +87,8 @@ var game = {
     }
 };
 
+var championships;
+
 function download(data, filename, type) {
     var file = new Blob([data], {type: type});
     if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -91,8 +112,9 @@ function saveGameToFirebase() {
     updateGame();
 
     var gameName = game.date + "_" + game.team1 + "_" + game.team2;
-    var gametype = $('input.gameType:checked').attr("value");
-    var url = "https://volleystat-5bc1c.firebaseio.com/volleyorgua/чемпионаты/2017/games/" + gametype + "/" + gameName +".json";
+    var champ = $("#pickChampionship").find("option:selected");
+    //var gametype = $('input.gameType:checked').attr("value");
+    var url = "https://volleystat-5bc1c.firebaseio.com/volleyorgua/чемпионаты/"+champ.val()+"/games/" + gameName +".json";
     $.put(url, JSON.stringify(game),
         function () {
             $("#lastSave").html("Последнее сохранение: " + new Date().toLocaleTimeString());
@@ -102,6 +124,45 @@ function saveGameToFirebase() {
             $('#save2firebase').prop('disabled', false);
         }
     );
+}
+
+
+function saveGameToFile() {
+    updateGame();
+    var data = JSON.stringify(game, null, 2);
+    var filename = game.date + "_" + game.team1+"_"+game.team2+".txt";
+    download(data, filename, "text");
+}
+
+function loadTeams(champ) {
+    var teams = championships[champ].teams;
+    var teams1 = $('#pickTeam1');
+    var teams2 = $('#pickTeam2');
+    teams1.empty();
+    teams2.empty();
+    for(var team in teams) {
+        var name = teams[team].name;
+        var teamListItem = "<option value='"+team+"'>"+name+"</option>\n";
+        teams1.append(teamListItem);
+        teams2.append(teamListItem);
+    }
+    if (Object.keys(teams).length > 0) {
+        $('#pickTeamsTable').show();
+    }
+}
+
+function loadChampionships() {
+    var picker = $("#pickChampionship");
+    $.get(
+        "https://volleystat-5bc1c.firebaseio.com/volleyorgua/чемпионаты.json?print=pretty",
+        null,
+        function (champs) {
+            championships = champs;;
+            for(var champ in champs) {
+                var name = champs[champ].name;
+                picker.append("<option value=\""+champ+"\">"+name+"</option>\n");
+            }
+        });
 }
 
 function updateGame() {
@@ -203,12 +264,22 @@ function updateGame() {
     game.stats.total.team2.error = $(".команда2_Ошибка").text();
 }
 
-function saveGameToFile() {
-    updateGame();
-    var data = JSON.stringify(game, null, 2);
-    var filename = game.date + "_" + game.team1+"_"+game.team2+".txt";
-    download(data, filename, "text");
+function pickTeam1(pickedTeam) {
+    $("#team1").text(pickedTeam);
+    $(".team1name").text(pickedTeam);
+    var team1color = $(this).data("color");
+    $("#team1color").css({'background': '#' + team1color});
+    $("#team1colorCustom").val(team1color);
 }
+
+function pickTeam2(pickedTeam) {
+    $("#team2").text(pickedTeam);
+    $(".team2name").text(pickedTeam);
+    var team2color = $(this).data("color");
+    $("#team2color").css({'background': '#' + team2color});
+    $("#team2colorCustom").val(team2color);
+}
+
 
 $.put = function(url, data, callback, errCallback){
 

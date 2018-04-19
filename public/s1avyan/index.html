@@ -279,29 +279,24 @@
     </div>
 </div>
 
-<form id="pickGame" class="list">
-    <label class="pickGame">
-        <input type="radio" class="gameType" name="group1" value="первая группа" checked>
-        первая группа
-    </label>
-    <br/>
-    <label class="pickGame">
-        <input type="radio" class="gameType" name="group1" value="вторая группа">
-        вторая группа
-    </label>
-    <br>
-    <label class="pickGame">
-        <input type="radio" class="gameType" name="group1" value="стыковочные игры">
-        стыковочные игры
-    </label>
-    <br/>
-    <label class="pickGame">
-        <input type="radio" class="gameType" name="group1" value="кубок">
-        кубок
-    </label>
-</form>
-
 <br/>
+
+<select id="pickChampionship">
+    <option>Выберите чемпионат</option>
+</select>
+
+<table id="pickTeamsTable">
+    <tr>
+        <th><label for="pickTeam1">Team1</label></th>
+        <th><label for="pickTeam2">Team2</label></th>
+    </tr><tr>
+    <td><select id="pickTeam1" size="10"></select></td>
+    <td><select id="pickTeam2" size="10"></select></td>
+</tr></table>
+<br/>
+
+<!--
+
 <div class="list">Первая группа<br>
     <div class="slim">
         <div class="pickTeam pick1" data-color="4aff36" data-pick="Rhino"></div>
@@ -436,6 +431,8 @@
         <div class="pickTeam pick2" data-color="FFFFFF" data-pick="Шторм"></div>
     </div>
 </div>
+-->
+
 <br/>
 <script src="js/jQuery.js"></script>
 <script src="js/js.js"></script>

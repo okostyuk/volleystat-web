@@ -18,6 +18,86 @@ function firebaseInit() {
     console.log("firebaseInit()");
 }
 
+function loadChampionships() {
+    $.get(
+        "https://volleystat-5bc1c.firebaseio.com/volleyorgua/чемпионаты.json?print=pretty",
+        null,
+        function (data) {
+
+        });
+}
+
+function loadGamesNew2() {
+    $("#group1gamesTable").hide();
+    $("#group2gamesTable").hide();
+    $("#championshipGamesTable").hide();
+    $("#otherGamesTable").hide();
+
+    $.get(
+        "https://volleystat-5bc1c.firebaseio.com/volleyorgua/чемпионаты.json?print=pretty",
+        null,
+        function (data) {
+            $("#preloader").hide();
+            gamesFromServer = data;
+            var keyNames = Object.keys(data);
+            var gamesDiv = $('#games');
+            gamesDiv.empty();
+
+            for(var gameType in data) {
+                var games = data[gameType];
+                var gamesArray = [];
+                var gameIds = [];
+                for (var gameId in games) {
+                    var gameObj = games[gameId];
+                    gamesArray.push(gameObj);
+                    gameIds.push(gameId);
+                }
+
+                var gameTable;
+                if ("первая группа" == gameType) {
+                    gameTable = $("#group1gamesTable");
+                } else if ("вторая группа"  == gameType) {
+                    gameTable = $("#group2gamesTable")
+                } else if ("кубок" == gameType) {
+                    gameTable = $("#championshipGamesTable");
+                } else {
+                    gameTable = $("#otherGamesTable");
+                }
+                gameTable.show();
+
+                gameTable.DataTable( {
+                    "paging":   false,
+                    "stateSave" : true,
+                    select: { style: 'single'},
+                    autoWidth: false,
+                    ordering: false,
+                    "data" : Object.keys(games),
+                    "columns" : [{
+                        data: function (gameId) {
+                            var game = games[gameId];
+                            var gameText = game.team1 + " - " + game.team2 + "<br/>";
+                            gameText += "<a href='#' gameType='" + gameType + "' gameId='" + gameId + "' class='gameLink'>";
+                            gameText += "( " + game.scores.team1 + ":" + game.scores.team2 + " ) ["
+                            gameText += scoreSetToText(game.scores.set1);
+                            gameText += scoreSetToText(game.scores.set2);
+                            gameText += scoreSetToText(game.scores.set3);
+                            gameText += scoreSetToText(game.scores.set4);
+                            gameText += scoreSetToText(game.scores.set5);
+
+                            gameText += "]</a>";
+                            return gameText;
+                        }
+                    }]
+                });
+
+            }
+
+            $(".gameLink").click(function () {
+                displayStat($(this).attr('gameType'), $(this).attr('gameId'));
+            });
+        })
+}
+
 function loadGamesNew() {
     $("#group1gamesTable").hide();
     $("#group2gamesTable").hide();
@@ -44,9 +124,6 @@ function loadGamesNew() {
                     gameIds.push(gameId);
                 }
 
-                //var gameTableId = guidGenerator();
-                //addGamesTable(gameTableId, gameType);
-                //var gameTable = $("#" + gameTableId);
                 var gameTable;
                 if ("первая группа" == gameType) {
                     gameTable = $("#group1gamesTable");
@@ -59,7 +136,7 @@ function loadGamesNew() {
                 }
                 gameTable.show();
 
-                var table1 = gameTable.DataTable( {
+                gameTable.DataTable( {
                     "paging":   false,
                     "stateSave" : true,
                     select: { style: 'single'},
@@ -83,12 +160,6 @@ function loadGamesNew() {
                         }
                     }]
                 });
-
-
-
-/*                gameTable.on('click', 'td', function () {
-                    alert( 'You clicked on '+table1.row( this ).data()+'\'s row' );
-                });*/
 
             }
 
