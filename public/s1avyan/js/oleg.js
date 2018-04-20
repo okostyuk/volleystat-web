@@ -26,6 +26,16 @@ $(document).ready(function() {
         pickTeam2(selected.html());
     });
 
+    $('#team1name').on('input', function () {
+        pickTeam1($('#team1name').val());
+        $("#pickTeam1").removeAttr("selected");
+    });
+
+    $('#team2name').on('input', function () {
+        pickTeam2($('#team2name').val());
+        $("#pickTeam2").removeAttr("selected");
+    });
+
 });
 
 var game = {
